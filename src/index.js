@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.css'
+import Counter from './components/counter';
+import Feed from './components/feed';
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+  <Feed />,
+  document.getElementById('feed')
 );
