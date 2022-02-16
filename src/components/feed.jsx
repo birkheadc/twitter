@@ -23,7 +23,11 @@ class Feed extends Component {
     setTweets(data) {
         let tweets = [];
         for (let i = 0; i < data.length; i++) {
-            let tweet = new Tweet(data[i].id, data[i].userName, data[i].contents);
+            let tweet = {
+                "id": data[i].id,
+                "userName": data[i].userName,
+                "contents": data[i].contents
+            };
             tweets.push(tweet);
         }
         this.setState({ tweets: tweets });
@@ -41,8 +45,8 @@ class Feed extends Component {
             <ul>
                 { this.state.tweets.map(
                     tweet =>
-                    <li key={tweet.state.id}>
-                        {tweet.render()}
+                    <li key={tweet.id}>
+                        {Tweet(tweet.userName, tweet.contents)}
                     </li>
                     )
                 }
