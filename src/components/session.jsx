@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { isUserLoggedIn } from '../helpers/isUserLoggedIn';
 
 class Session extends Component {
     state = { 
-        authToken: null,
+
      } 
 
     handleLogin = () => {
@@ -31,7 +32,31 @@ class Session extends Component {
     }
 
     setAuthToken(data) {
-        console.log(data);
+        let token = data.response;
+        if (token === null || token === "") {
+            this.handleBadToken();
+            return;
+        }
+        this.handleValidToken(token);
+    }
+
+    handleBadToken() {
+        // TODO
+        console.log("Bad token.");
+    }
+
+    handleValidToken(token) {
+        window.localStorage.setItem("AuthToken", token);
+    }
+
+    handleLogOut() {
+        console.log(isUserLoggedIn());
+
+        window.localStorage.removeItem("AuthToken");
+
+        console.log(isUserLoggedIn());
+
+        console.log(window.localStorage.getItem("AuthToken"));
     }
 
     render() { 
@@ -44,6 +69,7 @@ class Session extends Component {
                     <input id="login-password" type="password"></input>
                     <button onClick={this.handleLogin} type="button">Log In</button>
                 </form>
+                <button onClick={this.handleLogOut} type="button">Log Out</button>
             </div>
         );
     }
