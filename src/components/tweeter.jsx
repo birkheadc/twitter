@@ -3,17 +3,8 @@ import { isUserLoggedIn } from '../helpers/isUserLoggedIn';
 
 class Tweeter extends Component {
     state = { 
-        isVisible: false,
+        
     } 
-
-    constructor() {
-        super();
-        this.state.isVisible = isUserLoggedIn();
-    }
-
-    checkIfLoggedIn() {
-        this.setState({isVisible: isUserLoggedIn()});
-    }
 
     renderTweeterBox() {
         return (
@@ -25,7 +16,7 @@ class Tweeter extends Component {
     }
 
     render() {
-        if (this.state.isVisible === true) {
+        if (this.props.isLoggedIn === true) {
             return this.renderTweeterBox();
         }
         return null;
