@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { isUserLoggedIn } from '../helpers/isUserLoggedIn';
+import { setToken, getToken, deleteToken } from '../helpers/authTokenHelper';
 
 class Session extends Component {
     state = { 
-
-     } 
+        
+    } 
 
     handleLogin = () => {
         let userName = document.getElementById("login-userName").value;
@@ -46,31 +46,47 @@ class Session extends Component {
     }
 
     handleValidToken(token) {
-        window.localStorage.setItem("AuthToken", token);
+        setToken(token);
+        this.handleSetLogin(true);
     }
 
-    handleLogOut() {
-        console.log(isUserLoggedIn());
+    handleLogOut = () => {
+        deleteToken();
+        this.handleSetLogin(false);
+    }
 
-        window.localStorage.removeItem("AuthToken");
+    handleSetLogin = (isLoggedin) => {
+        this.props.handleSetLogin(isLoggedin);
+    }
 
-        console.log(isUserLoggedIn());
+    renderLoginForm() {
+        if (this.props.isLoggedIn === false) {
+            return (
+                <div className="form-group">
+                    <form action="http://localhost:8080/session" method='post'>
+                        <label htmlFor="login-userName">User Name</label>
+                        <input id="login-userName" type="text"></input>
+                        <label htmlFor="login-password">Password</label>
+                        <input id="login-password" type="password"></input>
+                        <button onClick={this.handleLogin} type="button">Log In</button>
+                    </form>
+                </div>
+            );
+        }
+    }
 
-        console.log(window.localStorage.getItem("AuthToken"));
+    renderLogoutButon() {
+        if (this.props.isLoggedIn === true) {
+            return <button onClick={this.handleLogOut} type="button">Log Out</button>;
+        }
     }
 
     render() { 
         return (
-            <div className="form-group">
-                <form action="http://localhost:8080/session" method='post'>
-                    <label htmlFor="login-userName">User Name</label>
-                    <input id="login-userName" type="text"></input>
-                    <label htmlFor="login-password">Password</label>
-                    <input id="login-password" type="password"></input>
-                    <button onClick={this.handleLogin} type="button">Log In</button>
-                </form>
-                <button onClick={this.handleLogOut} type="button">Log Out</button>
-            </div>
+            <React.Fragment>
+                {this.renderLoginForm()}
+                {this.renderLogoutButon()}
+            </React.Fragment>
         );
     }
 }

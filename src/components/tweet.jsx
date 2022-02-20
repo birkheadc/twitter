@@ -1,29 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Tweet extends Component {
-    state = {
-        id: 0,
-        user: "",
-        contents: "",
-    }
-
-    constructor(id, user, contents) {
-        super();
-        this.state = {
-            id: id,
-            user: user,
-            contents: contents,
-        }
-    }
-
-    render() { 
-        return (
-            <div>
-                <h2>{this.state.user}</h2>
-                <p>{this.state.contents}</p>
-            </div>
-        );
-    }
+function Tweet(user, contents, time) {
+    const date = new Date(time).toLocaleString();
+    return (
+        <div>
+            <h2>{user}</h2>
+            <p>{contents}</p>
+            <p>{date}</p>
+        </div>
+    );
 }
  
 export default Tweet;
