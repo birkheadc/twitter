@@ -1,5 +1,5 @@
-import React, { Component, createContext } from 'react';
-import { isUserLoggedIn } from '../helpers/isUserLoggedIn';
+import React, { Component } from 'react';
+import { setToken, getToken, deleteToken } from '../helpers/authTokenHelper';
 
 class Session extends Component {
     state = { 
@@ -46,12 +46,12 @@ class Session extends Component {
     }
 
     handleValidToken(token) {
-        window.localStorage.setItem("AuthToken", token);
+        setToken(token);
         this.handleSetLogin(true);
     }
 
     handleLogOut = () => {
-        window.localStorage.removeItem("AuthToken");
+        deleteToken();
         this.handleSetLogin(false);
     }
 
