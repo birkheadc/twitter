@@ -8,8 +8,8 @@ class Tweeter extends Component {
 
     handleTweet = () => {
         const text = document.getElementById("tweetMessageBox").value;
+        this.resetTweetMessageBox();
         if (text === null || text.trim() === "") {
-            this.resetTweetMessageBox();
             return;
         }
         this.postTweet(text);

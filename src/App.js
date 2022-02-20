@@ -30,7 +30,8 @@ class App extends Component {
             let tweet = {
                 "id": data[i].id,
                 "userName": data[i].userName,
-                "contents": data[i].contents
+                "contents": data[i].contents,
+                "time": data[i].time
             };
             tweets.push(tweet);
         }
