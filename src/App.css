@@ -1,0 +1,21 @@
+.root {
+    display: flex;
+}
+
+.left-column,
+.right-column,
+.center-column {
+    padding: 1rem;
+}
+
+.left-column,
+.right-column {
+    width: 15%;
+}
+.center-column {
+    flex: 2 1 1;
+}
+
+.list-group-item a {
+    text-decoration: none;
+}

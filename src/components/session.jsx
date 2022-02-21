@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { setToken, getToken, deleteToken } from '../helpers/authTokenHelper';
+import { setToken, deleteToken } from '../helpers/authTokenHelper';
 
 class Session extends Component {
     state = { 
@@ -59,18 +59,28 @@ class Session extends Component {
         this.props.handleSetLogin(isLoggedin);
     }
 
+    handleRegister = () => {
+        // TODO
+        console.log("Register");
+    }
+
     renderLoginForm() {
         if (this.props.isLoggedIn === false) {
             return (
-                <div className="form-group">
-                    <form action="http://localhost:8080/session" method='post'>
+                <form>
+                    <div className="form-group">
                         <label htmlFor="login-userName">User Name</label>
-                        <input id="login-userName" type="text"></input>
+                        <input className="form-control" id="login-userName" placeholder="User Name" type="text"></input>
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="login-password">Password</label>
-                        <input id="login-password" type="password"></input>
-                        <button onClick={this.handleLogin} type="button">Log In</button>
-                    </form>
-                </div>
+                        <input className="form-control" id="login-password" placeholder="Password" type="password"></input>
+                    </div>
+                    <div className="form-group">
+                        <button className="btn btn-primary" onClick={this.handleLogin} type="button">Log In</button>
+                        <button className="btn btn-secondary" onClick={this.handleRegister} type="button">Register</button>
+                    </div>
+                </form>
             );
         }
     }

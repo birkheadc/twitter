@@ -3,6 +3,7 @@ import './App.css';
 import Tweeter from './components/tweeter';
 import Feed from './components/feed';
 import Session from './components/session';
+import Nav from './components/nav';
 import { getToken } from './helpers/authTokenHelper';
 
 class App extends Component {
@@ -49,7 +50,11 @@ class App extends Component {
     }
 
     renderLeftColumn() {
-        return null;
+        return (
+            <React.Fragment>
+                {this.renderNav()}
+            </React.Fragment>
+        )
     }
 
     renderCenterColumn() {
@@ -59,6 +64,14 @@ class App extends Component {
                 {this.renderFeed()}
             </React.Fragment>
         );
+    }
+
+    renderNav() {
+        return <Nav handleTweet={this.handleTweet}/>;
+    }
+
+    handleTweet = () => {
+        console.log("Open tweet overlay");
     }
 
     renderTweeter() {
@@ -92,13 +105,13 @@ class App extends Component {
     render() {
       return (
         <React.Fragment>
-            <div id="left-column">
+            <div className="left-column" id="left-column">
                 {this.renderLeftColumn()}
             </div>
-            <div id="center-column">
+            <div className="center-column" id="center-column">
                 {this.renderCenterColumn()}
             </div>
-            <div id="right-column">
+            <div className="center-column" id="right-column">
                 {this.renderRightColumn()}
             </div>
         </React.Fragment>

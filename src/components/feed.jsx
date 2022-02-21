@@ -16,7 +16,7 @@ class Feed extends Component {
             <ul className="list-group">
                 { this.props.tweets.map(
                     tweet =>
-                    <li key={tweet.id}>
+                    <li className="list-group-item" key={tweet.id}>
                         {Tweet(tweet.userName, tweet.contents, tweet.time)}
                     </li>
                     )
